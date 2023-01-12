@@ -10,24 +10,25 @@ pipeline {
         agent {
             docker {
                 image 'node:lts-bullseye-slim'
-                args '-p 3000:3000'}
+                args '-p 3000:3000'
+                }
         } 
         steps {
-            sh 'node --version'
+            sh "node --version"
         }
         }
                 
-        //stage('Build') {
-        //steps {
-        //    sh 'npm run build'
-        //}
-        //}
+        stage('Build') {
+        steps {
+            sh "pm2 start 'npm run build'"
+        }
+        }
 
-        //stage('Test') {
-        //steps {
-        //    sh 'npm test'
-        //}
-        //}
+        stage('Test') {
+        steps {
+            sh "pm2 start 'npm test'"
+        }
+        }
         
         stage('Deploy') {
         steps {
