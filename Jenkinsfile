@@ -27,7 +27,7 @@ pipeline {
     
     stage('Deploy') {
       steps {
-        sh "pm2 start 'ng serve'"
+        sh "pm2 start 'npm start' &"
       }
     }
   }
