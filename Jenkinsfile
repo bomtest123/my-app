@@ -4,33 +4,35 @@ pipeline {
     environment {
         CI = 'true'
     }
-    
-  stages {
-    stage('Install package') {
-      agent {
-        docker { image 'node:16.13.1-alpine' }
-      } 
-      steps {
-        sh 'node --version'
-      }
-    }
-            
-    stage('Build') {
-      steps {
-        sh 'npm run build'
-      }
-    }
 
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
+    stages {
+        stage('Install package') {
+        agent {
+            docker {
+                image 'node:lts-bullseye-slim'
+                args '-p 3000:3000'}
+        } 
+        steps {
+            sh 'node --version'
+        }
+        }
+                
+        stage('Build') {
+        steps {
+            sh 'npm run build'
+        }
+        }
+
+        stage('Test') {
+        steps {
+            sh 'npm test'
+        }
+        }
+        
+        stage('Deploy') {
+        steps {
+            sh "pm2 start 'npm start' &"
+        }
+        }
     }
-    
-    stage('Deploy') {
-      steps {
-        sh "pm2 start 'npm start' &"
-      }
-    }
-  }
 }
