@@ -21,7 +21,7 @@ pipeline {
         stage('Build') {
         steps {
             echo "Branch is ${env.BRANCH_NAME}..."
-            sh "pm2 start 'npm run build'"
+            sh "pm2 start my-app-build.json"
         }
         }
 
