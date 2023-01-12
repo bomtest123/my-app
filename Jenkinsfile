@@ -1,8 +1,10 @@
 pipeline {
-  agent any
-  environment {
-    CI = 'true'
-  }
+    tools {nodejs "nodejs"}
+    agent any
+    environment {
+        CI = 'true'
+    }
+    
   stages {
     stage('Install package') {
       agent {
