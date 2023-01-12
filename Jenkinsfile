@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('Build') {
+    stage('Test') {
       steps {
         sh 'npm test'
       }
