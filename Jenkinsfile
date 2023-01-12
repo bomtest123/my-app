@@ -20,13 +20,13 @@ pipeline {
                 
         stage('Build') {
         steps {
-            sh 'npm run build'
+            sh "pm2 start 'npm run build'"
         }
         }
 
         stage('Test') {
         steps {
-            sh 'npm test'
+            sh "pm2 start 'npm test'"
         }
         }
         
