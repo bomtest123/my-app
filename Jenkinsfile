@@ -20,6 +20,7 @@ pipeline {
                 
         stage('Build') {
         steps {
+            echo "Branch is ${env.BRANCH_NAME}..."
             sh "pm2 start 'npm run build'"
         }
         }
