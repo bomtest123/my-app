@@ -3,11 +3,14 @@
       "name"        : "my-app",
       "script"      : "npm start",
       "watch"       : true,
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "env_production" : {
-         "NODE_ENV": "production"
+      "deploy" : {
+        "development" : {
+          "ref" : "origin/master",
+          "repo" : "git@github.com/bomtest123/my-app.git",
+          "path" : "/var/www/my-repository",
+          "post-deploy" : "npm install",
+          "host" : "localhost"
+        }
       }
     }]
   }
