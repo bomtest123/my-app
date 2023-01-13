@@ -42,7 +42,7 @@
       "path" : "/var/www/my-repository",
       "pre-deploy": "echo 'commands or local script path to be run on the host before the setup process starts'",
       "post-deploy" : "npm install",
-      "host" : "localhost"
+      "host" : ["localhost", "10.32.1.69"]
     }
   }
 }
