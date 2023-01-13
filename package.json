@@ -34,5 +34,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "deploy" : {
+    "development" : {
+      "ref" : "origin/prod",
+      "repo" : "https://github.com/bomtest123/my-app.git",
+      "path" : "/var/www/my-repository",
+      "pre-deploy": "echo 'commands or local script path to be run on the host before the setup process starts'",
+      "post-deploy" : "npm install",
+      "host" : "localhost"
+    }
   }
 }
