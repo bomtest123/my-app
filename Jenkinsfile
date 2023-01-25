@@ -1,8 +1,13 @@
 pipeline {
     tools {nodejs "nodejs"}
-    agent any
     environment {
         CI = 'true'
+    }
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 3001:3001'
+        }
     }
 
     stages {
