@@ -11,6 +11,13 @@ pipeline {
             sh "node --version"
         }
         }
+
+        stage('Kill process') {
+        steps {
+            echo "Branch is ${env.BRANCH_NAME}..."
+            sh "pm2 stop my-app"
+        }
+        }
                 
         stage('Build') {
         steps {
