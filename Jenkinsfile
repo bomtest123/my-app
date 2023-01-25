@@ -9,6 +9,7 @@ pipeline {
         stage('Install package') {
         steps {
             sh "node --version"
+            sh "pm2 prettylist"
         }
         }
 
