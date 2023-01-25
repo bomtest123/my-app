@@ -5,11 +5,11 @@
       "watch"       : true,
       "deploy" : {
         "development" : {
-          "ref" : "origin/prod",
+          "ref" : "origin/master",
           "repo" : "git@github.com/bomtest123/my-app.git",
           "path" : "/var/www/my-repository",
           "pre-deploy": "echo 'commands or local script path to be run on the host before the setup process starts'",
-          "post-deploy" : "npm install",
+          "post-deploy" : "npm start",
           "host" : "localhost"
         }
       }
