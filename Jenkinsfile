@@ -15,20 +15,12 @@ pipeline {
         stage('Build') {
         steps {
             echo "Branch is ${env.BRANCH_NAME}..."
-            sh "pm2 start my-app-build.json"
+            echo "workspace is ${env.WORKSPACE}..."
         }
         }
+       
 
-        stage('Test') {
-        steps {
-            sh "pm2 start 'npm test'"
-        }
-        }
-        
-        stage('Deploy') {
-        steps {
-            sh "pm2 start my-app.json"
-        }
-        }
+    dir("/home/sysadmin/Documents/react/my-app"){
+        sh 'pm2 stop my-app'
     }
 }
