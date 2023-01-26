@@ -18,7 +18,7 @@ pipeline {
             echo "workspace is ${env.WORKSPACE}..."
         }
         }
-       
+    }
 
     dir("/home/sysadmin/Documents/react/my-app"){
         sh 'pm2 stop my-app'
