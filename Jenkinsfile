@@ -17,7 +17,7 @@ pipeline {
                 echo "Branch is ${env.BRANCH_NAME}..."
                 echo "workspace is ${env.WORKSPACE}..."
                 
-                dir("/home/sysadmin/Documents/react/my-app"){
+                dir("/var/www/my-repository/source"){
                     sh 'pm2 stop my-app'
                 }
             }
