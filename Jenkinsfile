@@ -17,12 +17,12 @@ pipeline {
             sh "pm2 prettylist"
         }
         }
-
-       
-                
+      
         stage('Build') {
         steps {
+            def workspace = pwd()
             echo "Branch is ${env.BRANCH_NAME}..."
+            echo "Current directory is ${workspace}"
             sh "pm2 start my-app-build.json"
         }
         }
@@ -40,3 +40,4 @@ pipeline {
         }
     }
 }
+
