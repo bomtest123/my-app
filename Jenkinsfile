@@ -7,20 +7,21 @@ pipeline {
 
     stages {
         stage('Install package') {
-        steps {
-            sh "node --version"
-        }
+            steps {
+                sh "node --version"
+            }
         }
                 
         stage('Build') {
-        steps {
-            echo "Branch is ${env.BRANCH_NAME}..."
-            echo "workspace is ${env.WORKSPACE}..."
-        }
+            steps {
+                echo "Branch is ${env.BRANCH_NAME}..."
+                echo "workspace is ${env.WORKSPACE}..."
+                
+                dir("/home/sysadmin/Documents/react/my-app"){
+                    sh 'pm2 stop my-app'
+                }
+            }
         }
     }
-
-    dir("/home/sysadmin/Documents/react/my-app"){
-        sh 'pm2 stop my-app'
-    }
+    
 }
