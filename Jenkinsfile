@@ -7,19 +7,31 @@ pipeline {
 
     stages {
         stage('Install package') {
-            steps {
-                sh "node --version"
-            }
+        steps {
+            sh "node --version"
+            sh "pm2 prettylist"
         }
-                
+        }
+      
         stage('Build') {
-            steps {
-                echo "Branch is ${env.BRANCH_NAME}..."
-                echo "workspace is ${env.WORKSPACE}..."
-                sh "cd /var/www/my-repository/source && pwd"
-                sh "pm2 stop my-app"
-            }
+        steps {
+            def workspace = pwd()
+            echo "Branch is ${env.BRANCH_NAME}..."
+            echo "Current directory is ${workspace}"
+            sh "pm2 start my-app-build.json"
+        }
+        }
+
+        stage('Test') {
+        steps {
+            sh "pm2 start 'npm test'"
+        }
+        }
+        
+        stage('Deploy') {
+        steps {
+            sh "pm2 start my-app.json"
+        }
         }
     }
-    
 }
