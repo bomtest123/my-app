@@ -15,9 +15,7 @@ pipeline {
       
         stage('Build') {
         steps {
-            def workspace = pwd()
             echo "Branch is ${env.BRANCH_NAME}..."
-            echo "Current directory is ${workspace}"
             sh "pm2 start my-app-build.json"
         }
         }
