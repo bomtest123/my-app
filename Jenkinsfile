@@ -25,7 +25,7 @@ pipeline {
         steps {
             script {
                 if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json')) {
-                    echo "File src/main/rersources/index.html found!"
+                    echo "File my-app.json found!"
                     sh "pm2 start my-app.json"
                 }
             }
@@ -33,9 +33,9 @@ pipeline {
         }
         }
         
-        stage('Deploy') {
+        stage('Stop Server') {
         steps {
-            sh "pm2 start my-app.json"
+            sh "pm2 stop my-app.json"
         }
         }
     }
