@@ -12,7 +12,7 @@ pipeline {
                 sh "pm2 prettylist"
                 checkout scmGit(
                     branches: [[name: 'master']],
-                    userRemoteConfigs: [[url: '<repo>']])
+                    userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']])
             }
         }
       
