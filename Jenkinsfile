@@ -23,16 +23,13 @@ pipeline {
 
         stage('Test') {
         steps {
-           dir('/home/sysadmin/Documents/react/my-app'){
-                sh "pm2 ls"
-                //sh "rm application_snapshot-001.jar"
-                checkout scmGit(
-                    branches: [[name: 'master']],
-                    userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']])
-                //sh "mv path/to/new/jar path/to/old/jar application_snapshot-001.jar"
-                //sh "pm2 start start-switch.JSON"
+            script {
+                if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json') {
+                    echo "File src/main/rersources/index.html found!"
+                    sh "pm2 start my-app.json"
+                }
             }
-            sh "pm2 start 'npm test'"
+            
         }
         }
         
