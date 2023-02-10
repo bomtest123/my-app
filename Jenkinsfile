@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
         steps {
            dir('/home/sysadmin/Documents/react/my-app'){
-                sh "pm2 stop my-app"
+                sh "pm2 ls"
                 //sh "rm application_snapshot-001.jar"
                 checkout scmGit(
                     branches: [[name: 'master']],
