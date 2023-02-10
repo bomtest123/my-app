@@ -23,7 +23,7 @@ pipeline {
 
         stage('Test') {
         steps {
-           dir('/var/lib/jenkins/workspace/my-app_master'){
+           dir('/var/www/my-repository/current'){
                 sh "pm2 stop my-app"
                 //sh "rm application_snapshot-001.jar"
                 checkout scmGit(
