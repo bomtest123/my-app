@@ -23,6 +23,15 @@ pipeline {
 
         stage('Test') {
         steps {
+           dir('/home/sysadmin/Documents/react/my-app'){
+                sh "pm2 stop my-app"
+                //sh "rm application_snapshot-001.jar"
+                checkout scmGit(
+                    branches: [[name: 'master']],
+                    userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']])
+                //sh "mv path/to/new/jar path/to/old/jar application_snapshot-001.jar"
+                //sh "pm2 start start-switch.JSON"
+            }
             sh "pm2 start 'npm test'"
         }
         }
