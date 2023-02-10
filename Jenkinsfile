@@ -24,7 +24,7 @@ pipeline {
         stage('Test') {
         steps {
             script {
-                if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json') {
+                if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json')) {
                     echo "File src/main/rersources/index.html found!"
                     sh "pm2 start my-app.json"
                 }
