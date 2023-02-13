@@ -29,7 +29,7 @@ pipeline {
                 sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
              
                 //sshRemove remote: remote, path: "/home/sysadmin/Documents/Tests/test.sh"
-                writeFile file: 'my-app.sh', text: 'ls -lrt'
+                writeFile file: 'my-app.sh', text: 'pm2 start my-app.json'
                 sshScript remote:remote, script:"my-app.sh"
             }
         }
