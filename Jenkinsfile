@@ -26,8 +26,9 @@ pipeline {
         stage('Remote SSH') {
             steps {
                 sshCommand remote: remote, command: "ls -lrt"
-                sshCommand remote: remote, command: "sh 'ls /home/sysadmin/Documents/Tests'"
                 sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+             
+                sshRemove remote: remote, path: "/home/sysadmin/Documents/Tests/test.sh"
             }
         }
       
