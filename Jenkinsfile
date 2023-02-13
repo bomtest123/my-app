@@ -1,11 +1,11 @@
-pipeline {
-    def remote = [:]
+ def remote = [:]
     remote.name = 'test'
     remote.host = '10.33.2.103'
     remote.user = 'sysadmin'
     remote.password = 'admin123'
     remote.allowAnyHosts = true
-    
+
+pipeline {
     tools {nodejs "nodejs"}
     agent any
     environment {
