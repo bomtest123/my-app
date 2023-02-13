@@ -4,13 +4,6 @@ pipeline {
     environment {
         CI = 'true'
     }
-    
-    def remote = [:]
-        remote.name = 'test'
-        remote.host = '10.33.2.103'
-        remote.user = 'sysadmin'
-        remote.password = 'admin123'
-        remote.allowAnyHosts = true
 
     stages {
         stage('Install package') {
@@ -24,8 +17,16 @@ pipeline {
         }
         
         stage('Remote SSH') {
-          sshCommand remote: remote, command: "ls -lrt"
-          sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+            def remote = [:]
+            remote.name = 'test'
+            remote.host = '10.33.2.103'
+            remote.user = 'sysadmin'
+            remote.password = 'admin123'
+            remote.allowAnyHosts = true
+            steps {
+                sshCommand remote: remote, command: "ls -lrt"
+                sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+            }
         }
       
         stage('Build') {
