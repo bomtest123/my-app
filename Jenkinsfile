@@ -41,12 +41,15 @@ pipeline {
             steps {
                 checkout scmGit(
                     branches: [[name: 'dev']],
-                    userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']])
+                    userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']],)
             }
         }
         
         stage('Stop Server') {
             steps {
+                sshCommand remote: remote, command:"cd " +pathDir+ "; sudo ./my-app.sh"
+                sshCommand remote: remote1, command:"cd " +pathDir+ "; sudo ./my-app.sh"
+                sshCommand remote: remote2, command:"cd " +pathDir+ "; sudo ./my-app.sh"
                 sshCommand remote: remote, command: "pm2 stop APP_NAME"
                 sshCommand remote: remote1, command: "pm2 stop APP_NAME"
                 sshCommand remote: remote2, command: "pm2 stop APP_NAME"
@@ -57,9 +60,7 @@ pipeline {
       
         stage('Move files to remote node') {
             steps {
-                echo "Branch is ${env.BRANCH_NAME}..."
-                echo "Current directory is ${env.WORKSPACE}"
-                
+                sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
                 sshPut remote: remote, from: 'application_snapshot-001.jar', into: pathDir + '/application_snapshot-001.jar'
             }, 
         }
