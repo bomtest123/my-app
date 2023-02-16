@@ -57,15 +57,20 @@ pipeline {
               
             }
         }
-      
-        stage('Move files to remote node') {
+     
+        stage('Delete files from remote node') {
             steps {
                 sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
+            }
+        }
+     
+        stage('Move files to remote node') {
+            steps {
                 sshPut remote: remote, from: 'application_snapshot-001.jar', into: pathDir + '/application_snapshot-001.jar'
             }
         }
 
-        stage('Test') {
+        stage('Deploy RuPay Switch') {
             steps {
                 script {
                     if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json')) {
