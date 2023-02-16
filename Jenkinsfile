@@ -62,7 +62,7 @@ pipeline {
             steps {
                 sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
                 sshPut remote: remote, from: 'application_snapshot-001.jar', into: pathDir + '/application_snapshot-001.jar'
-            }, 
+            }
         }
 
         stage('Test') {
