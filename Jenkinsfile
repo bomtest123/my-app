@@ -1,23 +1,23 @@
  def remote = [:]
     remote.name = 'test'
-    remote.host = '10.33.2.103'
+    remote.host = '10.33.2.106'
     remote.user = 'sysadmin'
     remote.password = 'admin123'
     remote.allowAnyHosts = true
 
-def remote1 = [:]
-    remote1.name = 'test1'
-    remote1.host = '10.33.2.104'
-    remote1.user = 'sysadmin'
-    remote1.password = 'admin123'
-    remote1.allowAnyHosts = true
+// def remote1 = [:]
+//     remote1.name = 'test1'
+//     remote1.host = '10.33.2.104'
+//     remote1.user = 'sysadmin'
+//     remote1.password = 'admin123'
+//     remote1.allowAnyHosts = true
 
-def remote2 = [:]
-    remote2.name = 'test2'
-    remote2.host = '10.33.2.105'
-    remote2.user = 'sysadmin'
-    remote2.password = 'admin123'
-    remote2.allowAnyHosts = true
+// def remote2 = [:]
+//     remote2.name = 'test2'
+//     remote2.host = '10.33.2.105'
+//     remote2.user = 'sysadmin'
+//     remote2.password = 'admin123'
+//     remote2.allowAnyHosts = true
 
 def pathDir = "/home/sysadmin/Documents/Tests/my-app"
 
@@ -33,11 +33,11 @@ pipeline {
         stage('Check server status') {
             steps {
                 sshCommand remote: remote, command: "pm2 l"
-                sshCommand remote: remote1, command: "pm2 l"
-                sshCommand remote: remote2, command: "pm2 l"
+//                 sshCommand remote: remote1, command: "pm2 l"
+//                 sshCommand remote: remote2, command: "pm2 l"
             }
         }
-        stage('Checkout Application files') {
+        stage('Checkout Application source code') {
             steps {
                 checkout scmGit(
                     branches: [[name: 'dev']],
@@ -45,16 +45,11 @@ pipeline {
             }
         }
         
-        stage('Stop Server') {
+        stage('Stop remote node') {
             steps {
-                sshCommand remote: remote, command:"cd " +pathDir+ "; sudo ./my-app.sh"
-                sshCommand remote: remote1, command:"cd " +pathDir+ "; sudo ./my-app.sh"
-                sshCommand remote: remote2, command:"cd " +pathDir+ "; sudo ./my-app.sh"
+                sshCommand remote: remote, command: "cd " + pathDir
                 sshCommand remote: remote, command: "pm2 stop APP_NAME"
-                sshCommand remote: remote1, command: "pm2 stop APP_NAME"
-                sshCommand remote: remote2, command: "pm2 stop APP_NAME"
                 sshRemove remote: remote, path: pathDir + "/test.sh"
-              
             }
         }
      
@@ -66,7 +61,7 @@ pipeline {
      
         stage('Move files to remote node') {
             steps {
-                sshPut remote: remote, from: 'application_snapshot-001.jar', into: pathDir + '/application_snapshot-001.jar'
+                sshPut remote: remote, from: 'my-app-build.json', into: pathDir + '/my-app-build.json'
             }
         }
 
