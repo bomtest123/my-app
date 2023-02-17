@@ -46,7 +46,6 @@ pipeline {
                 sshPut remote: remote, from: 'test2.sh', into: pathDir + '/test2.sh'
             }
         }
-
         stage('Deploy RuPay Switch') {
             steps {
                    sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
