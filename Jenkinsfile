@@ -47,13 +47,14 @@ pipeline {
         stage('Stop remote node') {
             steps {
                 sshCommand remote: remote, command: "cd " + pathDir
-                //sshCommand remote: remote, command: "pm2 stop my-app"
-                sshRemove remote: remote, path: pathDir + "/test.sh"
+                sshCommand remote: remote, command: "pm2 stop my-app"
+                
             }
         }
      
         stage('Delete files from remote node') {
             steps {
+                sshRemove remote: remote, path: pathDir + "/test.sh"
                 sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
             }
         }
