@@ -47,7 +47,7 @@ pipeline {
         stage('Stop remote node') {
             steps {
                 sshCommand remote: remote, command: "cd " + pathDir
-                sshCommand remote: remote, command: "pm2 stop my-app"
+                //sshCommand remote: remote, command: "pm2 stop my-app"
                 sshRemove remote: remote, path: pathDir + "/test.sh"
             }
         }
