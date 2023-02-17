@@ -53,7 +53,7 @@ pipeline {
      
         stage('Delete files from remote node') {
             steps {
-                //sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
+                sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
             }
         }
      
@@ -76,6 +76,7 @@ pipeline {
                    sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
                
             }
+        }
         }
     }
 }
