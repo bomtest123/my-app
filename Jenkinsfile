@@ -33,8 +33,6 @@ pipeline {
         stage('Check server status') {
             steps {
                 sshCommand remote: remote, command: "pm2 l"
-//                 sshCommand remote: remote1, command: "pm2 l"
-//                 sshCommand remote: remote2, command: "pm2 l"
             }
         }
         stage('Checkout Application source code') {
@@ -48,14 +46,14 @@ pipeline {
         stage('Stop remote node') {
             steps {
                 sshCommand remote: remote, command: "cd " + pathDir
-                //sshCommand remote: remote, command: "pm2 stop APP_NAME"
+                sshCommand remote: remote, command: "pm2 stop my-app"
                 sshRemove remote: remote, path: pathDir + "/test.sh"
             }
         }
      
         stage('Delete files from remote node') {
             steps {
-                sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
+                //sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
             }
         }
      
@@ -68,13 +66,17 @@ pipeline {
         stage('Deploy RuPay Switch') {
             steps {
                 script {
-                    if (fileExists('/home/sysadmin/Documents/react/my-app/my-app.json')) {
+                    if (fileExists(pathDir + '/my-app.json')) {
                         echo "File my-app.json found!"
-                        sh "pm2 start my-app.json"
+                        sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
                     }
                 }
-
             }
+            steps {
+                   sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
+               }
+            }
+            
         }
     }
 }
