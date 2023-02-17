@@ -74,9 +74,8 @@ pipeline {
             }
             steps {
                    sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
-               }
+               
             }
-            
         }
     }
 }
