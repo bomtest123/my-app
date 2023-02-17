@@ -40,7 +40,7 @@ pipeline {
         stage('Checkout Application source code') {
             steps {
                 checkout scmGit(
-                    branches: [[name: 'dev']],
+                    branches: [[name: 'master']],
                     userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']],)
             }
         }
