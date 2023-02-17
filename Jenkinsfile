@@ -1,4 +1,4 @@
- def remote = [:]
+  def remote = [:]
     remote.name = 'test'
     remote.host = '10.33.2.106'
     remote.user = 'sysadmin'
@@ -65,19 +65,9 @@ pipeline {
 
         stage('Deploy RuPay Switch') {
             steps {
-                script {
-                    if (fileExists(pathDir + '/my-app.json')) {
-                        echo "File my-app.json found!"
-                        sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
-                    }
-                }
-            }
-            steps {
                    sshCommand remote: remote, command: 'pm2 start my-app.json', failOnError:'false'
                
             }
         }
-        }
     }
 }
-
