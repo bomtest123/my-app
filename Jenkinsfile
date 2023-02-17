@@ -32,6 +32,7 @@ pipeline {
     stages {
         stage('Check server status') {
             steps {
+                sshCommand remote: remote, command: "cd " + pathDir
                 sshCommand remote: remote, command: "pm2 l"
             }
         }
