@@ -28,7 +28,6 @@ pipeline {
                     userRemoteConfigs: [[url: 'https://github.com/bomtest123/my-app']],)
             }
         }
-        
         stage('Stop remote node') {
             steps {
                 sshCommand remote: remote, command: "cd " + pathDir
@@ -36,14 +35,12 @@ pipeline {
                 
             }
         }
-     
         stage('Delete files from remote node') {
             steps {
                 sshRemove remote: remote, path: pathDir + "/test.sh"
                 sshCommand remote: remote, command: 'rm my-app/*.jar', failOnError:'false'
             }
         }
-     
         stage('Move files to remote node') {
             steps {
                 sshPut remote: remote, from: 'test2.sh', into: pathDir + '/test2.sh'
