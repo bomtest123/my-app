@@ -61,7 +61,7 @@ pipeline {
      
         stage('Move files to remote node') {
             steps {
-                sshPut remote: remote, from: 'my-app-build.json', into: pathDir + '/my-app-build.json'
+                sshPut remote: remote, from: 'test2.sh', into: pathDir + '/test2.sh'
             }
         }
 
