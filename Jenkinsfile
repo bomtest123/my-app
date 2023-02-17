@@ -5,22 +5,7 @@
     remote.password = 'admin123'
     remote.allowAnyHosts = true
 
-// def remote1 = [:]
-//     remote1.name = 'test1'
-//     remote1.host = '10.33.2.104'
-//     remote1.user = 'sysadmin'
-//     remote1.password = 'admin123'
-//     remote1.allowAnyHosts = true
-
-// def remote2 = [:]
-//     remote2.name = 'test2'
-//     remote2.host = '10.33.2.105'
-//     remote2.user = 'sysadmin'
-//     remote2.password = 'admin123'
-//     remote2.allowAnyHosts = true
-
 def pathDir = "/home/sysadmin/Documents/Tests/my-app"
-
 
 pipeline {
     tools {nodejs "nodejs"}
